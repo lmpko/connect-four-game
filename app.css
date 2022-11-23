@@ -1,3 +1,6 @@
+html{
+    background-color: rgb(72, 44, 141);
+}
 
 body{
     background-color: rgb(121 69 255);
@@ -12,7 +15,7 @@ nav{
     gap: 10%;
     align-items: center;
     justify-content: center;
-    padding: 45px;
+    padding: 25px;
 }
 
 button {
@@ -92,23 +95,146 @@ section{
     grid-template-columns: 1fr 1fr 1fr; 
     align-items: center;
     justify-content: center;
-    gap: 10%;
+    justify-items: center;
     text-align: center;
-    padding: 45px 45px 0 45px;
+    padding: 5px 45px 0 45px;
 }
 
 .game-board{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
     background: white;
-    width: 450px;
-    height: 50vh;
+    width: 100%;
+    height: 100%;
     border-radius: 25px;
+    box-shadow: 0 4px 3px 3px rgb(0, 0, 0);
+    z-index: 2;
+    padding: 5px;
 }
 
+input[type=checkbox] {
+    visibility: hidden;
+}
+
+.main {
+    display: block;
+    position: relative;
+    padding: 10px;
+    margin:  15px 15px;
+    cursor: pointer;
+    font-size: 20px;
+}
+  
+/* Hide the default checkbox */
+input[type=checkbox] {
+    visibility: hidden;
+}
+  
+/* Creating a custom checkbox
+based on demand */
+.custom-checkbox {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 45px;
+    width: 45px;
+    background-color: rgb(121 69 255);
+    border-radius: 50%;
+    box-shadow: inset 0 4px 3px 3px rgb(0, 0, 0);
+
+}
+  
+/* Specify the background color to be
+shown when hovering over checkbox */
+.main:hover input ~ .custom-checkbox {
+    background-color: yellow;
+}
+  
+/* Specify the background color to be
+shown when checkbox is active */
+.main input:active ~ .custom-checkbox {
+    background-color: red;
+}
+  
+/* Specify the background color to be
+shown when checkbox is checked */
+.main input:checked ~ .custom-checkbox {
+    background-color: green;
+}
+  
+/* Checkmark to be shown in checkbox */
+/* It is not be shown when not checked */
+.custom-checkbox:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+/* Display checkmark when checked */
+.main input:checked ~ .custom-checkbox:after {
+    content: "";
+    display: block;
+}
+  
+/* Styling the checkmark using webkit */
+/* Rotated the rectangle by 45 degree and 
+showing only two border to make it look
+like a tickmark */
+.main .custom-checkbox:after {
+    border: solid white;
+    border-width: 0 4px 4px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* players */
 .players-data{
     display: flex;
     flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 15px;
+    font-weight: bold;
+    padding: 15px;
+    box-shadow: 0 3px 2px 2px rgb(0, 0, 0);
+    max-width: 180px;
+    min-width: 110px;
 }
 
+.players-data::before{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    position: relative;
+    top: -40px;
+    left: calc(50% - 35px);
+    font-size: 35px;
+    box-shadow: 0 4px 3px 1px rgb(0, 0, 0);
+}
+
+.player1::before{
+    content: ": )"; 
+    background-color: rgb(231, 44, 44);
+    rotate: -280deg;
+}
+
+.player2::before{
+    content: "( : "; 
+    background-color: rgb(222 246 56);
+    rotate: 280deg;
+}
+
+.players-data span:nth-child(1){
+    font-size: 18px;
+}
+.players-data span:nth-child(2){
+    font-size: 32px;
+}
  
 /* footer */
 
@@ -117,7 +243,78 @@ footer{
     height: 100px;
     background-color: rgb(72, 44, 141);
     border-radius: 50px 50px 0 0;
-    position: absolute;
-    bottom: 0;
-    z-index: -1;
+    position: relative;
+    bottom: auto;
+    z-index: 1;
+}
+
+
+@media only screen and (max-width: 955px) {
+    section{
+        display: grid;
+        grid-template-columns: 1fr 1fr; 
+        align-items: start;
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
+        padding: 5px 45px 0 45px;
+        grid-template-areas: 
+        " . ."
+        "game-board game-board" ; 
+    }
+    .game-board { 
+        grid-area: game-board; 
+        margin: 25px;
+        max-width: 540px;
+        padding: 5px;
+    }
+
+    .players-data::before{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        position: relative;
+        top: 25px;
+        font-size: 35px;
+        box-shadow: 0 4px 3px 1px rgb(0, 0, 0);
+    }
+
+    .player1::before{
+        left: -40px;
+    }
+
+    .player2::before{
+        left: 100px;
+    }
+
+    nav{
+        padding-bottom: 10px;
+    }
+
+    .main{
+        margin: 5px 5px;
+    }
+
+   
+}
+
+@media only screen and (max-width: 600px) {
+
+    .game-board{
+        width: auto;
+        padding: 0;
+    }
+   .players-data{
+        padding: 5px;
+   }
+  
+   .main{
+     margin: 7px 5px;
+     padding: 5px;
+   }
+
+   .custom-checkbox{
+        width: 30px;
+        height: 30px;
+   }
 }
